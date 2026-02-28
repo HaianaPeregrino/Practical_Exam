@@ -1,0 +1,41 @@
+table {
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+}
+td {
+  text-align: center;
+}
+
+.itcc211 {
+  background-color: #8fd3ff;
+}
+
+.fl15 {
+  background-color: #a7f3d0;
+}
+
+.pe14 {
+  background-color: #fde68a;
+}
+
+.ge14 {
+  background-color: #fbcfe8;
+}
+
+.cc15 {
+  background-color: #c7d2fe;
+}
+
+.engl5 {
+  background-color: #fef3c7;
+}
+
+.itcc111 {
+  background-color: #bae6fd;
+}
+
+.itcc131 {
+  background-color: #dcfce7;
+}

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yana's Learning Log</title>
+    <style>
+        /*
+          SOPHISTICATED SUNSET PALETTE
+          Background : #fdf6f0  — warm off-white (main page bg)
+          Surface    : #fff8f4  — near-white (cards)
+          Accent 1   : #8b597b  — mauve purple (headings, borders, header)
+          Accent 2   : #efa3a0  — dusty rose (highlights, tags, dots)
+          Text dark  : #3a2a2a  — deep warm brown (body text)
+          Text mid   : #7a5c6e  — muted mauve (meta, subtext)
+          Footer/CTA : #493129  — dark brown (footer only, used sparingly)
+        */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.75;
+            background-color: #fdf6f0;
+            color: #3a2a2a;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: #fff8f4;
+            color: #3a2a2a;
+            padding: 24px 30px;
+            border-bottom: 2px solid #efa3a0;
+            box-shadow: 0 2px 8px rgba(139, 89, 123, 0.07);
+        }
+        header h1 {
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            color: #8b597b;
+        }
+        header nav > ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+        .nav-links > li {
+            list-style: none;
+        }
+        .nav-links > li > a {
+            color: #7a5c6e;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+            font-family: Arial, sans-serif;
+        }
+        .nav-links > li > a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 1px;
+            background-color: #efa3a0;
+            transition: width 0.3s ease;
+        }
+        .nav-links > li > a:hover {
+            color: #8b597b;
+        }
+        .nav-links > li > a:hover::after {
+            width: 100%;
+        }
+
+        /* ================= MAIN LAYOUT ================= */
+        main.container {
+            display: flex;
+            gap: 24px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ================= LEFT PANEL ================= */
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .left-section {
+            background: #fff8f4;
+            color: #3a2a2a;
+            padding: 20px;
+            border-radius: 6px;
+            border-top: 2px solid #efa3a0;
+            box-shadow: 0 1px 6px rgba(139, 89, 123, 0.07);
+        }
+        .left-section h3 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8b597b;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f3ddd8;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .quick-links li a {
+            color: #7a5c6e;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-family: Arial, sans-serif;
+            display: block;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+        }
+        .quick-links li a:hover {
+            background: #fdf0eb;
+            color: #8b597b;
+            padding-left: 14px;
+        }
+
+        /* Tag Cloud */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+        .tag-cloud .tag {
+            background: transparent;
+            color: #8b597b;
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid #efa3a0;
+            cursor: default;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.5px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .tag-cloud .tag:hover {
+            background: #efa3a0;
+            color: #fff8f4;
+        }
+
+        /* Category List */
+        .category-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+        .category-list li {
+            font-size: 0.88rem;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #7a5c6e;
+        }
+        .cat-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #efa3a0;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        /* ================= BLOG POSTS ================= */
+        .container > .blog-posts {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+        .blog-posts > article {
+            background: #fff8f4;
+            color: #3a2a2a;
+            padding: 28px 30px;
+            border-radius: 6px;
+            border-left: 3px solid #efa3a0;
+            box-shadow: 0 1px 6px rgba(139, 89, 123, 0.07);
+        }
+        .blog-posts > article h2 {
+            font-size: 1.25rem;
+            font-weight: normal;
+            color: #8b597b;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        article h2 + .meta {
+            font-size: 0.78rem;
+            color: #b08898;
+            margin-bottom: 10px;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.5px;
+        }
+        article .content-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-size: 0.95rem;
+            color: #5a3e3e;
+        }
+        article:target .content-text {
+            -webkit-line-clamp: unset;
+            overflow: visible;
+        }
+        .meta + .content-text {
+            margin-top: 10px;
+        }
+        article > .read-more {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 0.78rem;
+            font-weight: normal;
+            text-decoration: none;
+            color: #fff8f4;
+            background: #8b597b;
+            padding: 5px 16px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: Arial, sans-serif;
+            transition: background 0.2s ease;
+        }
+        article > .read-more:hover {
+            background: #efa3a0;
+        }
+
+        /* ================= WORKS LIST ================= */
+        .works-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .works-links li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #fdf6f0;
+            border: 1px solid #f0ddd8;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #7a5c6e;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .works-links li a:hover {
+            background: #fff8f4;
+            border-color: #efa3a0;
+            color: #8b597b;
+        }
+        .works-icon {
+            font-size: 1.1rem;
+        }
+        .works-label {
+            flex: 1;
+            letter-spacing: 0.3px;
+        }
+        .works-arrow {
+            font-size: 0.85rem;
+            color: #efa3a0;
+            transition: transform 0.2s ease;
+        }
+        .works-links li a:hover .works-arrow {
+            transform: translate(2px, -2px);
+        }
+
+        /* ================= RIGHT SIDEBAR ================= */
+        .container > aside.sidebar {
+            flex: 1;
+            background: #fff8f4;
+            padding: 20px;
+            border-radius: 6px;
+            border-top: 2px solid #8b597b;
+            box-shadow: 0 1px 6px rgba(139, 89, 123, 0.07);
+            color: #3a2a2a;
+            height: fit-content;
+        }
+        .sidebar > h3 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8b597b;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #f3ddd8;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+        }
+        .sidebar > h3:first-child {
+            margin-top: 0;
+        }
+        .sidebar > p {
+            font-size: 0.88rem;
+            color: #7a5c6e;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .sidebar > ul {
+            list-style: none;
+            margin-top: 6px;
+        }
+        .sidebar > ul > li {
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+            font-family: Arial, sans-serif;
+            color: #7a5c6e;
+            padding-left: 12px;
+            border-left: 2px solid #efa3a0;
+        }
+
+        /* ================= FOOTER ================= */
+        body > footer {
+            background: #493129;
+            color: #fdf6f0;
+            text-align: center;
+            padding: 18px;
+            margin-top: 30px;
+            font-family: Arial, sans-serif;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            body > main.container {
+                flex-direction: column;
+                padding: 16px;
+            }
+            header nav > ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Yana's Learning Log</h1>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#works">Works</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container">
+
+    <!-- ===== LEFT PANEL ===== -->
+    <aside class="left-panel">
+
+        <div class="left-section">
+            <h3>Quick Links</h3>
+            <ul class="quick-links">
+                <li><a href="#home">🏠 Home</a></li>
+                <li><a href="#works">🖼️ Works</a></li>
+                <li><a href="#about">👤 About</a></li>
+                <li><a href="#contact">✉️ Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="left-section">
+            <h3>Tags</h3>
+            <div class="tag-cloud">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">Flexbox</span>
+                <span class="tag">Web Dev</span>
+                <span class="tag">Semantic</span>
+                <span class="tag">Responsive</span>
+                <span class="tag">Layout</span>
+                <span class="tag">IT Student</span>
+            </div>
+        </div>
+
+        <div class="left-section">
+            <h3>Categories</h3>
+            <ul class="category-list">
+                <li><span class="cat-dot"></span>Web Development</li>
+                <li><span class="cat-dot"></span>CSS</li>
+                <li><span class="cat-dot"></span>HTML</li>
+                <li><span class="cat-dot"></span>Programming</li>
+            </ul>
+        </div>
+
+    </aside>
+
+    <!-- ===== BLOG POSTS ===== -->
+    <section class="blog-posts">
+
+        <article id="home">
+            <h2>Building My Digital Foundations</h2>
+            <p class="meta">Posted on February 17, 2026</p>
+            <p class="content-text">
+                Welcome to my personal blog. My name is Haiana, and I am a Bachelor of Science in Information Technology student who is continuously learning how systems work and how digital spaces are structured. This website represents my journey in understanding web systems and modern technologies. As I explore HTML, CSS, programming, and layout design, I realize that building a website is not just about visuals but rather, it is about clarity, structure, and purpose. Through this blog, I document what I learn, the challenges I encounter, and the progress I make as I grow in the field of technology.
+            </p>
+            <a href="#home" class="read-more">See More</a>
+        </article>
+
+        <article id="works">
+            <h2>My Works</h2>
+            <p class="meta">A collection of my previous activities and projects.</p>
+            <ul class="works-links">
+                <li>
+                    <a href="https://codepen.io/yui089/pen/vEKPVNm?editors=1111" target="_blank">
+                        <span class="works-icon">💌</span>
+                        <span class="works-label">Valentines Card</span>
+                        <span class="works-arrow">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://codepen.io/yui089/pen/jErvpQJ" target="_blank">
+                        <span class="works-icon">📅</span>
+                        <span class="works-label">Class Schedule</span>
+                        <span class="works-arrow">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://codepen.io/yui089/pen/wBWybLV" target="_blank">
+                        <span class="works-icon">📚</span>
+                        <span class="works-label">Library Card</span>
+                        <span class="works-arrow">↗</span>
+                    </a>
+                </li>
+            </ul>
+        </article>
+
+        <article id="about">
+            <h2>Who I Am Beyond the Screen</h2>
+            <p class="meta">Posted on February 12, 2026</p>
+            <p class="content-text">
+                I am an IT student who values discipline, structure, and meaningful design. I believe that technology should not only function correctly but should also be ethical, accessible, and thoughtfully created. I am particularly interested in web development and user experience because I enjoy seeing how design and logic come together to form a working system. As someone who is naturally quiet and observant, I tend to focus deeply on details and structure, which helps me appreciate well-organized code and clean layouts. My goal is to continue improving my technical skills while maintaining strong values in the systems I build.
+            </p>
+            <a href="#about" class="read-more">See More</a>
+        </article>
+
+        <article id="contact">
+            <h2>Let's Connect and Collaborate</h2>
+            <p class="meta">Posted on February 15, 2026</p>
+            <p class="content-text">
+                If you would like to connect for academic collaboration, project discussions, or professional opportunities, feel free to reach out. Email: haianaperegrino@gmail.com | Contact: 09566950096. I am always open to learning from others and growing through shared ideas and experiences.
+            </p>
+            <a href="#contact" class="read-more">See More</a>
+        </article>
+
+    </section>
+
+    <!-- ===== RIGHT SIDEBAR ===== -->
+    <aside class="sidebar">
+        <h3>About Me</h3>
+        <p>
+            Hi! I am a web development student learning modern layout techniques 
+            using semantic HTML and CSS Flexbox.
+        </p>
+    </aside>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 My Blog. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
